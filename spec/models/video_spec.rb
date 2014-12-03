@@ -1,68 +1,58 @@
 require 'spec_helper'
 
 describe Video do
-  it { should have_many(:categories)}
-  it { should validate_presence_of(:title)}
-  it { should validate_presence_of(:description)}
-  it {should have_many(:reviews).order("created_at DESC")}
+  it { should have_many(:categories) }
+  it { should validate_presence_of(:title) }
+  it { should validate_presence_of(:description) }
+  it { should have_many(:reviews).order("created_at DESC")}
 
-  describe do
-    it "returns a empty array if there is no match" do
+  describe "search_by_title" do
+
+    it "returns an empty array if there is no match" do
       futurama = Video.create(title: "futurama", description: "space travel")
-      back_to_future = Video.create(title: "back to future ", description: "time travel")
+      back_to_future = Video.create(title: "back to the future", description: "a cool movie")
       expect(Video.search_by_title("hello")).to eq([])
     end
 
-    it "returns a empty array if empty search" do
-      futurama = Video.create(title: "futurama", description: "space travel")
-      back_to_future = Video.create(title: "back to future ", description: "time travel")
-      expect(Video.search_by_title("")).to eq([])
-    end
-
     it "returns an array of one video for an exact match" do
-      futurama = Video.create(title: "Futurama", description: "space travel")
-      back_to_future = Video.create(title: "back to future ", description: "time travel")
-      expect(Video.search_by_title("Futurama")).to eq([futurama])
+      futurama = Video.create(title: "futurama", description: "space travel")
+      back_to_future = Video.create(title: "back to the future", description: "a cool movie")
+      expect(Video.search_by_title("FuTuRaMa")).to eq([futurama])
     end
 
-    it "returns an array of one video for partial match" do
-      futurama = Video.create(title: "Futurama", description: "space travel")
-      back_to_future = Video.create(title: "back to future ", description: "time travel")
-      expect(Video.search_by_title("rama")).to eq([futurama])
+    it "returns an array of one video for a partial match" do
+      futurama = Video.create(title: "futurama", description: "space travel")
+      back_to_future = Video.create(title: "back to the future", description: "a cool movie")
+      expect(Video.search_by_title("urama")).to eq([futurama])
     end
 
-    it "returns an array for partial match ordered by created_at" do
-      futurama = Video.create(title: "Futurama", description: "space travel", created_at: 1.day.ago)
-      back_to_future = Video.create(title: "Back to Future ", description: "time travel")
-      expect(Video.search_by_title("Futur")).to eq([back_to_future, futurama])
+    it "returns an array of all matches ordered by created_at" do
+      futurama = Video.create(title: "futurama", description: "space travel", created_at: 1.day.ago)
+      back_to_future = Video.create(title: "back to the future", description: "a cool movie")
+      expect(Video.search_by_title("futur")).to eq([back_to_future, futurama])
+    end
+
+    it "returns an empty array for a search with an empty string" do
+      futurama = Video.create(title: "futurama", description: "space travel")
+      back_to_future = Video.create(title: "back to the future", description: "a cool movie")
+      expect(Video.search_by_title("")).to eq([])
     end
 
   end
 end
 
-
 # describe Video do
-#   it 'Video saves itself' do
-#     video = Video.new(title: "Monk", description: "A great story")
+#   it "saves itself" do
+#     video = Video.new(title: "monk", description: "a great tv show")
 #     video.save
 #     expect(Video.first).to eq(video)
 #   end
 
-#   it 'Videos belong to a category'
-#     drama = Category.create(name: "dramas")
-#     monk = Video.create(title: "Monk", description: "A great story", category: dramas)
-#     expect(monk.category).to eq(dramas)
+#   it "belongs to category" do
+#     dramas = Category.create(name: "dramas")
+#     monk = Video.create(title: "monk", description: "a great video")
+#     VideoCategory.create(video_id: monk.id, category_id: dramas.id)
+#     expect(monk.categories).to eq([dramas])
 #   end
-
-#   it 'Videos mandates a title'
-#     monk = Video.create(description: "A great story")
-#     expect(Video.count).to eq(0)
-#   end
-
-#   it 'Videos mandates description'
-#     drama = Category.create(name: "dramas")
-#     monk = Video.create(title: "Monk")
-#     expect(Video.count).to eq(0)
-#   end
-
 # end
+

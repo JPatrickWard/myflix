@@ -1,6 +1,24 @@
-%section.ui-index
-  %ul
-    - Dir.glob('app/views/ui/*.html.haml').sort.each do |file|
-      - wireframe = File.basename(file,'.html.haml')
-      -  unless wireframe == 'index' || wireframe.match(/^_/)
-        %li= link_to wireframe.titleize, action: wireframe unless wireframe == 'index'
+%section.invite.container
+  .row
+    .col-sm-10.col-sm-offset-1
+      %form.invite
+        %header
+          %h1 Invite a friend to join MyFlix!
+        %fieldset
+          .form-group
+            %label Friend's Name
+            .row
+              .col-sm-4
+                %input.form-control(type="text")
+          .form-group
+            %label Friend's Email Address
+            .row
+              .col-sm-4
+                %input.form-control(type="email")
+          .form-group
+            %label Invitation Message
+            .row
+              .col-sm-6
+                %textarea.form-control(rows=6) Please join this really cool site!
+        %fieldset.form-group.action
+          %input(type="submit" value="Send Invitation" class="btn btn-default")
