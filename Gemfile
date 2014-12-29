@@ -12,6 +12,9 @@ gem 'pg'
 gem 'bootstrap_form'
 gem 'fabrication'
 gem 'faker'
+gem "sentry-raven" #, :git => "https://github.com/getsentry/raven-ruby.git"
+gem 'paratrooper'
+gem 'draper'
 
 group :development do
   gem 'thin'

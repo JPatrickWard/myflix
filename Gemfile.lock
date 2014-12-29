@@ -49,12 +49,20 @@ GEM
     database_cleaner (1.2.0)
     debug_inspector (0.0.2)
     diff-lcs (1.2.5)
+    draper (1.4.0)
+      actionpack (>= 3.0)
+      activemodel (>= 3.0)
+      activesupport (>= 3.0)
+      request_store (~> 1.0)
     erubis (2.7.0)
     eventmachine (1.0.0)
+    excon (0.42.1)
     execjs (2.0.2)
     fabrication (2.11.3)
     faker (1.4.3)
       i18n (~> 0.5)
+    faraday (0.9.0)
+      multipart-post (>= 1.2, < 3)
     haml (4.0.5)
       tilt
     haml-rails (0.5.3)
@@ -62,6 +70,9 @@ GEM
       activesupport (>= 4.0.1)
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
+    heroku-api (0.3.21)
+      excon (~> 0.38)
+      multi_json (~> 1.8)
     hike (1.2.3)
     i18n (0.6.9)
     jquery-rails (3.0.4)
@@ -75,6 +86,13 @@ GEM
     mime-types (1.25.1)
     minitest (5.3.4)
     multi_json (1.10.1)
+    multipart-post (2.0.0)
+    netrc (0.8.0)
+    paratrooper (2.4.1)
+      excon
+      heroku-api (~> 0.3)
+      netrc (~> 0.7)
+      rendezvous (~> 0.0.1)
     pg (0.17.0)
     polyglot (0.3.5)
     pry (0.9.12.3)
@@ -107,6 +125,8 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.3.2)
+    rendezvous (0.0.2)
+    request_store (1.1.0)
     rspec (2.0.0)
       rspec-core (= 2.0.0)
       rspec-expectations (= 2.0.0)
@@ -125,6 +145,8 @@ GEM
       sass (~> 3.2.0)
       sprockets (~> 2.8, <= 2.11.0)
       sprockets-rails (~> 2.0)
+    sentry-raven (0.12.2)
+      faraday (>= 0.7.6)
     slop (3.4.7)
     sprockets (2.11.0)
       hike (~> 1.2)
@@ -161,10 +183,12 @@ DEPENDENCIES
   bootstrap_form
   coffee-rails
   database_cleaner (= 1.2.0)
+  draper
   fabrication
   faker
   haml-rails
   jquery-rails
+  paratrooper
   pg
   pry
   pry-nav
@@ -172,5 +196,6 @@ DEPENDENCIES
   rails_12factor
   rspec-rails (= 2.0)
   sass-rails
+  sentry-raven
   thin
   uglifier

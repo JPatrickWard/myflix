@@ -24,6 +24,10 @@ class QueueItem < ActiveRecord::Base
     end
   end
 
+  def category_name
+    category.name
+  end
+
   private
 
   def review
